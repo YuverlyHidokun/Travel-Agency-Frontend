@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms'; // ← necesario para ngModel
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router'; // <-- FALTA ESTO
+import { API_URL } from 'src/app/config/api';
 
 @Component({
   selector: 'app-login',
@@ -11,13 +13,14 @@ import { FormsModule } from '@angular/forms'; // ← necesario para ngModel
   styleUrls: ['./login.page.scss'],
   imports: [
     IonicModule,
-    FormsModule
+    FormsModule,
+    RouterModule // <-- AGREGA ESTO AQUÍ
   ]
 })
 export class LoginPage {
   email = '';
   password = '';
-  backendUrl = 'https://travel-agency-backend-o18s.onrender.com/travel/usuarios/login';
+  backendUrl = `${API_URL}/travel/usuarios/login`;
 
   constructor(
     private http: HttpClient,
