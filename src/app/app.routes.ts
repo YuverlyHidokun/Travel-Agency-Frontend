@@ -1,8 +1,6 @@
 import { Routes } from '@angular/router';
 import { LoginPage } from './pages/login/login.page';
 import { TabsPage } from './tabs/tabs.page';
-import { RegisterPage } from './pages/register/register.page';
-import { VerificacionPage } from './pages/verificacion/verificacion.page';
 
 export const routes: Routes = [
   {
@@ -14,28 +12,43 @@ export const routes: Routes = [
     path: 'login',
     component: LoginPage
   },
-  { 
-    path: 'register', 
-    component: RegisterPage 
+  {
+    path: 'register',
+    loadComponent: () => import('./pages/register/register.page').then(m => m.RegisterPage)
   },
   {
     path: 'travel/verificar/:token',
-    component: VerificacionPage
-  },
-  {
-    path: 'tabs',
-    component: TabsPage
-  },
-  {
-    path: 'register',
-    loadComponent: () => import('./pages/register/register.page').then( m => m.RegisterPage)
+    loadComponent: () => import('./pages/verificacion/verificacion.page').then(m => m.VerificacionPage)
   },
   {
     path: 'terminos',
-    loadComponent: () => import('./pages/terminos/terminos.page').then( m => m.TerminosPage)
+    loadComponent: () => import('./pages/terminos/terminos.page').then(m => m.TerminosPage)
   },
   {
-    path: 'verificacion',
-    loadComponent: () => import('./pages/verificacion/verificacion.page').then( m => m.VerificacionPage)
+    path: 'tabs',
+    component: TabsPage,
+    children: [
+      {
+        path: 'explorar',
+        loadComponent: () => import('./explorar/explorar.page').then(m => m.ExplorarPage),
+      },
+      {
+        path: 'planificador',
+        loadComponent: () => import('./planificador/planificador.page').then(m => m.PlanificadorPage),
+      },
+      {
+        path: 'reservas',
+        loadComponent: () => import('./reservas/reservas.page').then(m => m.ReservasPage),
+      },
+      {
+        path: 'perfil',
+        loadComponent: () => import('./perfil/perfil.page').then(m => m.PerfilPage),
+      },
+      {
+        path: '',
+        redirectTo: 'explorar',
+        pathMatch: 'full'
+      }
+    ]
   }
 ];

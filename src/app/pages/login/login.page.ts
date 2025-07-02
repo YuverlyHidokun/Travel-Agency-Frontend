@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ToastController, LoadingController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router'; // <-- FALTA ESTO
+import { RouterModule } from '@angular/router';
 import { API_URL } from 'src/app/config/api';
 
 @Component({
@@ -14,7 +14,7 @@ import { API_URL } from 'src/app/config/api';
   imports: [
     IonicModule,
     FormsModule,
-    RouterModule // <-- AGREGA ESTO AQUÍ
+    RouterModule
   ]
 })
 export class LoginPage {
@@ -24,13 +24,15 @@ export class LoginPage {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController
   ) {}
 
   async login() {
-    const loading = document.createElement('ion-loading');
-    loading.message = 'Iniciando sesión...';
-    document.body.appendChild(loading);
+    const loading = await this.loadingCtrl.create({
+      message: 'Iniciando sesión...'
+    });
     await loading.present();
 
     this.http.post(this.backendUrl, {
@@ -38,17 +40,17 @@ export class LoginPage {
       password: this.password
     }).subscribe({
       next: async (res: any) => {
-        loading.dismiss();
+        await loading.dismiss();
         localStorage.setItem('token', res.token);
         this.router.navigate(['/tabs']);
       },
       error: async err => {
-        loading.dismiss();
-        const toast = document.createElement('ion-toast');
-        toast.message = err.error?.msg || 'Error al iniciar sesión';
-        toast.duration = 3000;
-        toast.color = 'danger';
-        document.body.appendChild(toast);
+        await loading.dismiss();
+        const toast = await this.toastCtrl.create({
+          message: err.error?.msg || 'Error al iniciar sesión',
+          duration: 3000,
+          color: 'danger'
+        });
         await toast.present();
       }
     });

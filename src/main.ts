@@ -7,6 +7,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 
+import { addIcons } from 'ionicons';
+import { personOutline, compassOutline, calendarOutline, receiptOutline } from 'ionicons/icons';
+
+// Registrar los iconos para que Ionic los pueda usar
+addIcons({
+  'person-outline': personOutline,
+  'compass-outline': compassOutline,
+  'calendar-outline': calendarOutline,
+  'receipt-outline': receiptOutline,
+});
+
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -14,7 +25,6 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(HttpClientModule),
     provideRouter(routes, withPreloading(PreloadAllModules)),
   ],
-  
 });
 
 
