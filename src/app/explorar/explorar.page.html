@@ -17,7 +17,7 @@
           <ion-card-content>
             <p>{{ paquete.descripcion }}</p>
             <p><strong>Precio:</strong> ${{ paquete.precio }}</p>
-            <ion-button size="small" color="primary">Ver más</ion-button>
+            <ion-button [routerLink]="['/tabs/paquete', paquete._id]">Ver más</ion-button>
             <ion-button size="small" fill="outline" color="success">Reservar</ion-button>
           </ion-card-content>
         </ion-card>

@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonicModule } from '@ionic/angular';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonicModule} from '@ionic/angular';
 import { PaquetesService } from '../services/paquetes.service';
 import { Paquete } from '../models/paquete.model';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-explorar',
   templateUrl: './explorar.page.html',
   styleUrls: ['./explorar.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule],
+  imports: [IonicModule, CommonModule, RouterModule],
 })
 export class ExplorarPage implements OnInit {
   paquetes: Paquete[] = [];

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginPage } from './pages/login/login.page';
 import { TabsPage } from './tabs/tabs.page';
+import { DetallePaquetePage } from './pages/detalle-paquete/detalle-paquete.page'
 
 export const routes: Routes = [
   {
@@ -45,10 +46,18 @@ export const routes: Routes = [
         loadComponent: () => import('./perfil/perfil.page').then(m => m.PerfilPage),
       },
       {
+        path: 'paquete/:id',
+        loadComponent: () => import('./pages/detalle-paquete/detalle-paquete.page').then(m => m.DetallePaquetePage)
+      },
+      {
         path: '',
         redirectTo: 'explorar',
         pathMatch: 'full'
       }
     ]
+  },
+  {
+    path: 'detalle-paquete',
+    loadComponent: () => import('./pages/detalle-paquete/detalle-paquete.page').then( m => m.DetallePaquetePage)
   }
 ];
