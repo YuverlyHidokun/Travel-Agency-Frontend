@@ -1,17 +1,62 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title>Planificador</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <form (ngSubmit)="buscarViajes()">
+    <ion-item>
+      <ion-label>Tipo de viaje</ion-label>
+      <ion-select [(ngModel)]="tipoViaje" name="tipoViaje">
+        <ion-select-option value="ida">Solo ida</ion-select-option>
+        <ion-select-option value="ida-vuelta">Ida y vuelta</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ion-item>
+      <ion-label position="stacked">Origen</ion-label>
+      <ion-input [(ngModel)]="origen" name="origen" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Destino</ion-label>
+      <ion-input [(ngModel)]="destino" name="destino" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Pasajeros</ion-label>
+      <ion-input type="number" [(ngModel)]="pasajeros" name="pasajeros" min="1"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Clase</ion-label>
+      <ion-select [(ngModel)]="clase" name="clase">
+        <ion-select-option value="economica">Económica</ion-select-option>
+        <ion-select-option value="ejecutiva">Ejecutiva</ion-select-option>
+        <ion-select-option value="primera">Primera clase</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="block" type="submit">Buscar</ion-button>
+  </form>
+
+  <ion-list *ngIf="resultados?.length">
+  <ion-item *ngFor="let resultado of resultados">
+    <ion-thumbnail slot="start">
+      <img [src]="resultado.imagenes[0]" alt="Imagen del paquete" />
+    </ion-thumbnail>
+
+    <ion-label>
+      <h2>{{ resultado.nombre }}</h2>
+      <p>{{ resultado.descripcion }}</p>
+      <p><strong>${{ resultado.precio }}</strong></p>
+
+      <div class="botones">
+        <ion-button size="small" [routerLink]="['/tabs/paquete', resultado._id]">Ver más</ion-button>
+        <ion-button size="small" fill="outline" color="success">Reservar</ion-button>
+      </div>
+    </ion-label>
+  </ion-item>
+</ion-list>
 </ion-content>
