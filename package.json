@@ -9,7 +9,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "prebuild": "npm install typescript@5.3.3 --save-dev"
   },
   "private": true,
   "dependencies": {
