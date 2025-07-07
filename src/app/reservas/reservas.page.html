@@ -1,17 +1,64 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title>Mis Reservas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <!-- Lista de reservas -->
+  <ion-list *ngIf="reservas.length > 0; else noReservas">
+    <ion-item *ngFor="let reserva of reservas">
+      <ion-label>
+        <h2>{{ reserva.paquete.nombre }}</h2>
+        <p>Fecha: {{ reserva.fechaViaje | date }}</p>
+        <p>Pasajeros: {{ reserva.pasajeros }}</p>
+        <p>Estado: 
+          <ion-badge [color]="
+            reserva.estado === 'confirmada' ? 'success' : 
+            reserva.estado === 'pendiente' ? 'warning' : 'danger'">
+            {{ reserva.estado }}
+          </ion-badge>
+        </p>
+      </ion-label>
+
+      <ion-buttons slot="end">
+        <ion-button (click)="editarReserva(reserva)" color="primary">Editar</ion-button>
+        <ion-button (click)="confirmarEliminar(reserva)" color="danger">Eliminar</ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #noReservas>
+    <p class="ion-text-center">No tienes reservas aún.</p>
+  </ng-template>
+
+  <ion-button expand="block" (click)="mostrarFormularioCrear = !mostrarFormularioCrear">
+    {{ mostrarFormularioCrear ? 'Cancelar' : 'Crear Nueva Reserva' }}
+  </ion-button>
+
+  <!-- Formulario para crear nueva reserva -->
+  <div *ngIf="mostrarFormularioCrear" class="ion-padding">
+    <ion-item>
+      <ion-label>Paquete</ion-label>
+      <ion-select [(ngModel)]="nuevaReserva.paqueteId" placeholder="Selecciona un paquete">
+        <ion-select-option *ngFor="let paquete of paquetesDisponibles" [value]="paquete._id">
+          {{ paquete.nombre }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Fecha de viaje</ion-label>
+      <ion-datetime [(ngModel)]="nuevaReserva.fechaViaje" displayFormat="YYYY-MM-DD" placeholder="Selecciona fecha"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Pasajeros</ion-label>
+      <ion-input type="number" [(ngModel)]="nuevaReserva.pasajeros" min="1"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click)="crearReserva()">Reservar</ion-button>
+  </div>
+
 </ion-content>

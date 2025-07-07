@@ -39,7 +39,16 @@ export const routes: Routes = [
       },
       {
         path: 'reservas',
-        loadComponent: () => import('./reservas/reservas.page').then(m => m.ReservasPage),
+        children: [
+          {
+            path: '',
+            loadComponent: () => import('./reservas/reservas.page').then(m => m.ReservasPage),
+          },
+          {
+            path: ':id',
+            loadComponent: () => import('./reservas/reservas.page').then(m => m.ReservasPage),
+          }
+        ]
       },
       {
         path: 'perfil',

@@ -54,7 +54,9 @@
 
       <div class="botones">
         <ion-button size="small" [routerLink]="['/tabs/paquete', resultado._id]">Ver más</ion-button>
-        <ion-button size="small" fill="outline" color="success">Reservar</ion-button>
+        <ion-button size="small" fill="outline" color="success" [routerLink]="['/tabs/reservas', resultado._id]">
+          Reservar
+        </ion-button>
       </div>
     </ion-label>
   </ion-item>

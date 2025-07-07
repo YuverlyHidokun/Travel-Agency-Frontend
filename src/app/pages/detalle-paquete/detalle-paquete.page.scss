@@ -1,9 +1,22 @@
-.carousel-item img {
+/* Carousel image fixed height y que cubra todo */
+.carousel-img {
   height: 300px;
   object-fit: cover;
   border-radius: 10px;
 }
 
+/* Ajustes para que ion-content permita scroll completo */
+ion-content {
+  --overflow: auto;
+}
+
+/* Evitar que container limite altura */
+.container {
+  min-height: 100%;
+  padding-bottom: 2rem;
+}
+
+/* Opcional: ajustar fuente y tamaños */
 .card-title {
   font-size: 1.5rem;
 }
