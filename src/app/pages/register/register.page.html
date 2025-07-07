@@ -31,7 +31,17 @@
       <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
     </ion-item>
 
-    <ion-item lines="none">
+    <!-- Selector de imagen de perfil -->
+    <div class="ion-text-center ion-margin-top">
+      <ion-avatar *ngIf="imagenPreview" class="ion-margin-bottom">
+        <img [src]="imagenPreview" alt="Foto de perfil" />
+      </ion-avatar>
+
+      <ion-button expand="block" (click)="seleccionarFoto()">Seleccionar foto de perfil</ion-button>
+    </div>
+
+    <!-- Checkbox de términos -->
+    <ion-item lines="none" class="ion-margin-top">
       <ion-checkbox slot="start" [(ngModel)]="acepta_terminos" name="terminos"></ion-checkbox>
       <ion-label class="ion-text-wrap">
         Acepto los 

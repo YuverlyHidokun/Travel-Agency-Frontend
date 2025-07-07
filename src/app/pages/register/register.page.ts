@@ -5,13 +5,15 @@ import { IonicModule, ToastController, LoadingController } from '@ionic/angular'
 import { FormsModule } from '@angular/forms';
 import { API_URL } from 'src/app/config/api';
 import { RouterModule } from '@angular/router';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
-  imports: [IonicModule, FormsModule, RouterModule],
+  imports: [IonicModule, FormsModule, RouterModule, CommonModule],
 })
 export class RegisterPage {
   nombre = '';
@@ -21,6 +23,10 @@ export class RegisterPage {
   password = '';
   acepta_terminos = false;
 
+  fotoPerfil: File | null = null;
+  imagenPreview: string | null = null;
+  
+
   backendUrl = `${API_URL}/travel/usuarios/registro`;
 
   constructor(
@@ -29,6 +35,27 @@ export class RegisterPage {
     private toastCtrl: ToastController,
     private loadingCtrl: LoadingController
   ) {}
+
+  async seleccionarFoto() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Photos
+      });
+
+      if (image && image.dataUrl) {
+        this.imagenPreview = image.dataUrl;
+
+        // Convertir la imagen base64 a archivo tipo File
+        const blob = await (await fetch(image.dataUrl)).blob();
+        this.fotoPerfil = new File([blob], 'fotoPerfil.jpg', { type: blob.type });
+      }
+    } catch (error) {
+      console.error('Error al seleccionar imagen:', error);
+    }
+  }
 
   async registrar() {
     if (!this.acepta_terminos) {
@@ -46,16 +73,19 @@ export class RegisterPage {
     });
     await loading.present();
 
-    const body = {
-      nombre: this.nombre,
-      apellido: this.apellido,
-      numero: this.numero,
-      email: this.email,
-      password: this.password,
-      acepta_terminos: String(this.acepta_terminos)
-    };
+    const formData = new FormData();
+    formData.append('nombre', this.nombre);
+    formData.append('apellido', this.apellido);
+    formData.append('numero', this.numero);
+    formData.append('email', this.email);
+    formData.append('password', this.password);
+    formData.append('acepta_terminos', String(this.acepta_terminos));
 
-    this.http.post(this.backendUrl, body).subscribe({
+    if (this.fotoPerfil) {
+      formData.append('imagen', this.fotoPerfil);
+    }
+
+    this.http.post(this.backendUrl, formData).subscribe({
       next: async (res: any) => {
         await loading.dismiss();
         const toast = await this.toastCtrl.create({
