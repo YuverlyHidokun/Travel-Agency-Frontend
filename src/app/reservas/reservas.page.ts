@@ -9,6 +9,7 @@ import { API_URL } from 'src/app/config/api';
   selector: 'app-reservas',
   templateUrl: 'reservas.page.html',
   styleUrls: ['reservas.page.scss'],
+  standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class ReservasPage implements OnInit {
