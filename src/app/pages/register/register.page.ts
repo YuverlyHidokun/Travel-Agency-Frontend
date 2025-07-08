@@ -1,19 +1,53 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { IonicModule, ToastController, LoadingController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { API_URL } from 'src/app/config/api';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { CommonModule } from '@angular/common';
+import { API_URL } from 'src/app/config/api';
+
+// IMPORTACIONES STANDALONE DE IONIC
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonCheckbox,
+  IonButton,
+  IonAvatar,
+  IonList,
+  ToastController,
+  LoadingController
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
-  imports: [IonicModule, FormsModule, RouterModule, CommonModule],
+  imports: [
+    // Angular
+    CommonModule,
+    FormsModule,
+    RouterModule,
+
+    // Ionic standalone components
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonItem,
+    IonLabel,
+    IonInput,
+    IonCheckbox,
+    IonButton,
+    IonAvatar,
+    IonList,
+  ],
 })
 export class RegisterPage {
   nombre = '';
@@ -25,7 +59,6 @@ export class RegisterPage {
 
   fotoPerfil: File | null = null;
   imagenPreview: string | null = null;
-  
 
   backendUrl = `${API_URL}/travel/usuarios/registro`;
 
@@ -45,10 +78,8 @@ export class RegisterPage {
         source: CameraSource.Photos
       });
 
-      if (image && image.dataUrl) {
+      if (image?.dataUrl) {
         this.imagenPreview = image.dataUrl;
-
-        // Convertir la imagen base64 a archivo tipo File
         const blob = await (await fetch(image.dataUrl)).blob();
         this.fotoPerfil = new File([blob], 'fotoPerfil.jpg', { type: blob.type });
       }

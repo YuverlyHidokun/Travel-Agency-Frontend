@@ -1,10 +1,27 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { IonicModule, ToastController, LoadingController } from '@ionic/angular';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonList,
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonContent,
+  IonInput,
+  IonItem,
+  IonLabel,
+  ToastController,
+  LoadingController,
+} from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { API_URL } from 'src/app/config/api';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +29,23 @@ import { API_URL } from 'src/app/config/api';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   imports: [
-    IonicModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonList,
+    IonButton,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonContent,
+    IonInput,
+    IonItem,
+    IonLabel,
     FormsModule,
-    RouterModule
+    CommonModule,
+    RouterModule,
+    HttpClientModule
   ]
 })
 export class LoginPage {
