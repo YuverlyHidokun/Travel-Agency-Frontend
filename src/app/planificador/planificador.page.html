@@ -1,64 +1,90 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Planificador</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form (ngSubmit)="buscarViajes()">
-    <ion-item>
-      <ion-label>Tipo de viaje</ion-label>
-      <ion-select [(ngModel)]="tipoViaje" name="tipoViaje">
-        <ion-select-option value="ida">Solo ida</ion-select-option>
-        <ion-select-option value="ida-vuelta">Ida y vuelta</ion-select-option>
-      </ion-select>
-    </ion-item>
+  <ng-container *ngIf="isLoggedIn; else guestView">
 
-    <ion-item>
-      <ion-label position="stacked">Origen</ion-label>
-      <ion-input [(ngModel)]="origen" name="origen" required></ion-input>
-    </ion-item>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Planifica tu viaje</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
 
-    <ion-item>
-      <ion-label position="stacked">Destino</ion-label>
-      <ion-input [(ngModel)]="destino" name="destino" required></ion-input>
-    </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Origen</ion-label>
+          <ion-input [(ngModel)]="origen" placeholder="Ciudad de origen"></ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Pasajeros</ion-label>
-      <ion-input type="number" [(ngModel)]="pasajeros" name="pasajeros" min="1"></ion-input>
-    </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Destino</ion-label>
+          <ion-input [(ngModel)]="destino" placeholder="Ciudad destino"></ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label>Clase</ion-label>
-      <ion-select [(ngModel)]="clase" name="clase">
-        <ion-select-option value="economica">Económica</ion-select-option>
-        <ion-select-option value="ejecutiva">Ejecutiva</ion-select-option>
-        <ion-select-option value="primera">Primera clase</ion-select-option>
-      </ion-select>
-    </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Tipo de viaje</ion-label>
+          <ion-select [(ngModel)]="tipoViaje">
+            <ion-select-option value="ida">Solo ida</ion-select-option>
+            <ion-select-option value="ida-vuelta">Ida y vuelta</ion-select-option>
+          </ion-select>
+        </ion-item>
 
-    <ion-button expand="block" type="submit">Buscar</ion-button>
-  </form>
+        <ion-item>
+          <ion-label position="stacked">Clase</ion-label>
+          <ion-select [(ngModel)]="clase">
+            <ion-select-option value="economica">Económica</ion-select-option>
+            <ion-select-option value="ejecutiva">Ejecutiva</ion-select-option>
+          </ion-select>
+        </ion-item>
 
-  <ion-list *ngIf="resultados?.length">
-  <ion-item *ngFor="let resultado of resultados">
-    <ion-thumbnail slot="start">
-      <img [src]="resultado.imagenes[0]" alt="Imagen del paquete" />
-    </ion-thumbnail>
+        <ion-item>
+          <ion-label position="stacked">Pasajeros</ion-label>
+          <ion-input type="number" min="1" [(ngModel)]="pasajeros"></ion-input>
+        </ion-item>
 
-    <ion-label>
-      <h2>{{ resultado.nombre }}</h2>
-      <p>{{ resultado.descripcion }}</p>
-      <p><strong>${{ resultado.precio }}</strong></p>
-
-      <div class="botones">
-        <ion-button size="small" [routerLink]="['/tabs/paquete', resultado._id]">Ver más</ion-button>
-        <ion-button size="small" fill="outline" color="success" [routerLink]="['/tabs/reservas', resultado._id]">
-          Reservar
+        <ion-button expand="block" (click)="buscarViajes()">
+          Buscar
         </ion-button>
-      </div>
-    </ion-label>
-  </ion-item>
-</ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="resultados.length > 0">
+      <ion-card-header>
+        <ion-card-title>Resultados</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let resultado of resultados">
+            <ion-label>
+              <h2>{{ resultado.nombre }}</h2>
+              <p>{{ resultado.descripcion }}</p>
+            </ion-label>
+
+            <ion-buttons slot="end">
+              <ion-button
+                [routerLink]="['/tabs/paquete', resultado._id]"
+                color="primary"
+              >
+                Ver más
+              </ion-button>
+
+              <ion-button color="success" [routerLink]="['/tabs/reservas']" [queryParams]="{ paqueteId: resultado._id }">
+                Reservar
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+  </ng-container>
+
+  <ng-template #guestView>
+    <div class="ion-text-center">
+      <h2>Debes iniciar sesión para usar el planificador</h2>
+      <ion-button expand="block" routerLink="/login" color="primary">Iniciar sesión</ion-button>
+    </div>
+  </ng-template>
 </ion-content>

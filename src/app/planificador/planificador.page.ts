@@ -14,6 +14,10 @@ import { RouterModule } from '@angular/router';
   imports: [IonicModule, CommonModule, FormsModule, RouterModule]
 })
 export class PlanificadorPage implements OnInit {
+
+  isLoggedIn = false;
+  token = localStorage.getItem('token');
+  
   tipoViaje = 'ida';
   origen = '';
   destino = '';
@@ -23,7 +27,9 @@ export class PlanificadorPage implements OnInit {
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.isLoggedIn = !!this.token;
+  }
 
   buscarViajes() {
     const params = new HttpParams()

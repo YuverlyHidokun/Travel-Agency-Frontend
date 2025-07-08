@@ -4,6 +4,8 @@ import { IonicModule, NavController, ToastController, AlertController } from '@i
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { API_URL } from 'src/app/config/api';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-reservas',
@@ -16,6 +18,9 @@ export class ReservasPage implements OnInit {
   reservas: any[] = [];
   paquetesDisponibles: any[] = [];
   mostrarFormularioCrear = false;
+  isLoggedIn = false;
+  token = localStorage.getItem('token');
+
 
   // Para nueva reserva
   nuevaReserva = {
@@ -30,10 +35,21 @@ export class ReservasPage implements OnInit {
     private http: HttpClient,
     private toastCtrl: ToastController,
     private navCtrl: NavController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    this.isLoggedIn = !!this.token;
+
+    const paqueteIdDesdeURL = this.route.snapshot.queryParamMap.get('paqueteId');
+
+    if (paqueteIdDesdeURL) {
+      this.nuevaReserva.paqueteId = paqueteIdDesdeURL;
+      this.mostrarFormularioCrear = true;
+      this.presentToast('Paquete seleccionado, completa los datos para reservar');
+    }
+
     this.cargarReservas();
     this.cargarPaquetes();
   }
