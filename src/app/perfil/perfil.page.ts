@@ -17,6 +17,7 @@ import { ModalController } from '@ionic/angular';
 export class PerfilPage implements OnInit {
   usuario: any = null;
   token = localStorage.getItem('token');
+  isLoggedIn = false;
 
   constructor(
     private http: HttpClient,
@@ -27,27 +28,29 @@ export class PerfilPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.obtenerPerfil();
+    this.isLoggedIn = !!this.token;
+
+    if (this.isLoggedIn) {
+      this.obtenerPerfil();
+    }
   }
 
   async obtenerPerfil() {
-    if (!this.token) {
-      this.presentToast('No hay sesión activa');
-      this.navCtrl.navigateRoot('/login');
-      return;
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+      
+      this.http.get(`${API_URL}/travel/usuarios/perfil`, { headers }).subscribe({
+        next: (res: any) => {
+          this.usuario = res.usuario || res;
+        },
+        error: err => {
+          console.error(err);
+          this.presentToast('Error al obtener perfil');
+        }
+      });
     }
 
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    
-    this.http.get(`${API_URL}/travel/usuarios/perfil`, { headers }).subscribe({
-      next: (res: any) => {
-        this.usuario = res.usuario || res;
-      },
-      error: err => {
-        console.error(err);
-        this.presentToast('Error al obtener perfil');
-      }
-    });
+  goToLogin() {
+    this.navCtrl.navigateRoot('/login');
   }
 
   async cerrarSesion() {

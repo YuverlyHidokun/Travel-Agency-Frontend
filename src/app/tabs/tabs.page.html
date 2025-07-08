@@ -5,12 +5,12 @@
       <ion-label>Explorar</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="planificador" href="/tabs/planificador">
+    <ion-tab-button *ngIf="isLoggedIn" tab="planificador" href="/tabs/planificador">
       <ion-icon name="calendar-outline"></ion-icon>
       <ion-label>Planificador</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="reservas" href="/tabs/reservas">
+    <ion-tab-button *ngIf="isLoggedIn" tab="reservas" href="/tabs/reservas">
       <ion-icon name="receipt-outline"></ion-icon>
       <ion-label>Reservas</ion-label>
     </ion-tab-button>

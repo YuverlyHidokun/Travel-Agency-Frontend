@@ -12,8 +12,10 @@ import { triangle, ellipse, square } from 'ionicons/icons';
 })
 export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
+  isLoggedIn = false;
 
   constructor() {
     addIcons({ triangle, ellipse, square });
+    this.isLoggedIn = !!localStorage.getItem('token');
   }
 }

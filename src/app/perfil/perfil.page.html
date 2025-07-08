@@ -6,62 +6,75 @@
 
 <ion-content class="ion-padding">
 
-  <!-- Cargando datos -->
-  <ng-container *ngIf="usuario; else cargando">
-    
-    <!-- Foto y nombre -->
-    <div class="perfil-header ion-text-center">
-      <ion-avatar class="avatar-perfil">
-        <img [src]="usuario.imagenUrl || 'assets/default-user.jpg'" alt="Foto de perfil">
-      </ion-avatar>
-      <h2>{{ usuario.nombre }} {{ usuario.apellido }}</h2>
-      <p>{{ usuario.email }}</p>
-    </div>
+  <!-- Si hay sesión -->
+  <ng-container *ngIf="isLoggedIn; else guestView">
 
-    <!-- Datos personales -->
-    <ion-list lines="inset">
-      <ion-item>
-        <ion-label>Nombre</ion-label>
-        <ion-note slot="end">{{ usuario.nombre }}</ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-label>Apellido</ion-label>
-        <ion-note slot="end">{{ usuario.apellido }}</ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-label>Teléfono</ion-label>
-        <ion-note slot="end">{{ usuario.numero }}</ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-label>Email</ion-label>
-        <ion-note slot="end">{{ usuario.email }}</ion-note>
-      </ion-item>
-    </ion-list>
+    <!-- Cargando datos -->
+    <ng-container *ngIf="usuario; else cargando">
+      
+      <!-- Foto y nombre -->
+      <div class="perfil-header ion-text-center">
+        <ion-avatar class="avatar-perfil">
+          <img [src]="usuario.imagenUrl || 'assets/default-user.jpg'" alt="Foto de perfil">
+        </ion-avatar>
+        <h2>{{ usuario.nombre }} {{ usuario.apellido }}</h2>
+        <p>{{ usuario.email }}</p>
+      </div>
 
-    <!-- Botones de acción -->
-    <div class="ion-margin-top">
-      <ion-button expand="block" color="primary" (click)="abrirModalEditar()">
-        ✏️ Editar Perfil
-      </ion-button>
+      <!-- Datos personales -->
+      <ion-list lines="inset">
+        <ion-item>
+          <ion-label>Nombre</ion-label>
+          <ion-note slot="end">{{ usuario.nombre }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Apellido</ion-label>
+          <ion-note slot="end">{{ usuario.apellido }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Teléfono</ion-label>
+          <ion-note slot="end">{{ usuario.numero }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-note slot="end">{{ usuario.email }}</ion-note>
+        </ion-item>
+      </ion-list>
 
-      <ion-button expand="block" fill="outline" color="medium" (click)="cambiarFotoPerfil()">
-        📷 Cambiar Foto
-      </ion-button>
+      <!-- Botones de acción -->
+      <div class="ion-margin-top">
+        <ion-button expand="block" color="primary" (click)="abrirModalEditar()">
+          ✏️ Editar Perfil
+        </ion-button>
 
-      <ion-button expand="block" fill="outline" color="warning" (click)="abrirModalPassword()">
-        🔒 Cambiar Contraseña
-      </ion-button>
+        <ion-button expand="block" fill="outline" color="medium" (click)="cambiarFotoPerfil()">
+          📷 Cambiar Foto
+        </ion-button>
 
-      <ion-button expand="block" color="danger" (click)="cerrarSesion()">
-        🚪 Cerrar Sesión
-      </ion-button>
-    </div>
+        <ion-button expand="block" fill="outline" color="warning" (click)="abrirModalPassword()">
+          🔒 Cambiar Contraseña
+        </ion-button>
+
+        <ion-button expand="block" color="danger" (click)="cerrarSesion()">
+          🚪 Cerrar Sesión
+        </ion-button>
+      </div>
+    </ng-container>
+
+    <!-- Cargando datos -->
+    <ng-template #cargando>
+      <ion-spinner name="crescent" class="ion-margin-top"></ion-spinner>
+      <p class="ion-text-center">Cargando perfil...</p>
+    </ng-template>
+
   </ng-container>
 
-  <!-- Placeholder si aún no carga -->
-  <ng-template #cargando>
-    <ion-spinner name="crescent" class="ion-margin-top"></ion-spinner>
-    <p class="ion-text-center">Cargando perfil...</p>
+  <!-- Si es invitado -->
+  <ng-template #guestView>
+    <div class="ion-text-center ion-padding">
+      <h2>Para ver el perfil debes iniciar sesión</h2>
+      <ion-button expand="block" color="primary" (click)="goToLogin()">Iniciar sesión</ion-button>
+    </div>
   </ng-template>
 
 </ion-content>
