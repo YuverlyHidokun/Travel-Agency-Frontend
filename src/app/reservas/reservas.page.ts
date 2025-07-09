@@ -1,31 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { 
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
   IonContent,
-  IonList,
-  IonItem,
-  IonLabel,
-  IonButtons,
-  IonButton,
   IonCard,
   IonCardHeader,
   IonCardContent,
   IonCardTitle,
+  IonList,
+  IonItem,
+  IonLabel,
   IonInput,
   IonSelect,
   IonSelectOption,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  ToastController,
-  AlertController,
-  LoadingController,
-  NavController } from '@ionic/angular';
+  IonButton,
+  IonButtons,
+  IonBadge,
+  IonText,
+  IonDatetime
+} from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { API_URL } from 'src/app/config/api';
 import { ActivatedRoute } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
+import { ToastController, NavController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reservas',
@@ -36,23 +38,27 @@ import { ActivatedRoute } from '@angular/router';
     CommonModule,
     FormsModule,
     RouterModule,
+    // Ionic standalone components usados en el HTML:
     IonHeader,
     IonToolbar,
     IonTitle,
     IonContent,
-    IonList,
-    IonItem,
-    IonLabel,
-    IonButtons,
-    IonButton,
     IonCard,
     IonCardHeader,
     IonCardContent,
     IonCardTitle,
+    IonList,
+    IonItem,
+    IonLabel,
     IonInput,
     IonSelect,
-    IonSelectOption],
-    providers: [ToastController, AlertController, LoadingController]
+    IonSelectOption,
+    IonButton,
+    IonButtons,
+    IonBadge,
+    IonText,
+    IonDatetime],
+    providers: [ToastController, AlertController, NavController]
 })
 export class ReservasPage implements OnInit {
   reservas: any[] = [];
