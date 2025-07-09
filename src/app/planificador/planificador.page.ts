@@ -1,6 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonButtons,
+  IonButton,
+  IonCard,
+  IonCardHeader,
+  IonCardContent,
+  IonCardTitle,
+  IonInput,
+  IonSelect,
+  IonSelectOption,
+  IonToolbar,
+  IonHeader,
+  IonTitle } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { API_URL } from 'src/app/config/api';
@@ -11,7 +26,27 @@ import { RouterModule } from '@angular/router';
   templateUrl: './planificador.page.html',
   styleUrls: ['./planificador.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, RouterModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonCard,
+    IonCardHeader,
+    IonCardContent,
+    IonCardTitle,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonButtons,
+    IonButton,
+    IonInput,
+    IonSelect,
+    IonSelectOption
+  ]
 })
 export class PlanificadorPage implements OnInit {
 

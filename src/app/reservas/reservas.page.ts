@@ -1,6 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule, NavController, ToastController, AlertController } from '@ionic/angular';
+import { 
+  IonContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonButtons,
+  IonButton,
+  IonCard,
+  IonCardHeader,
+  IonCardContent,
+  IonCardTitle,
+  IonInput,
+  IonSelect,
+  IonSelectOption,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  ToastController,
+  AlertController,
+  LoadingController,
+  NavController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { API_URL } from 'src/app/config/api';
@@ -12,7 +32,27 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: 'reservas.page.html',
   styleUrls: ['reservas.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonButtons,
+    IonButton,
+    IonCard,
+    IonCardHeader,
+    IonCardContent,
+    IonCardTitle,
+    IonInput,
+    IonSelect,
+    IonSelectOption],
+    providers: [ToastController, AlertController, LoadingController]
 })
 export class ReservasPage implements OnInit {
   reservas: any[] = [];

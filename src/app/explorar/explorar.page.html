@@ -22,7 +22,7 @@
               size="small" 
               fill="outline" 
               color="success"
-              [routerLink]="['/tabs/reservas', paquete._id]">
+              [routerLink]="['/tabs/reservas']" [queryParams]="{ paqueteId: paquete._id }">
               Reservar
             </ion-button>
           </ion-card-content>

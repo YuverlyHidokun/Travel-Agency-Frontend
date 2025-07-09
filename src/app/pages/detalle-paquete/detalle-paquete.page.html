@@ -45,11 +45,8 @@
 
         <!-- Botón Reservar -->
     <div class="mt-3">
-      <ion-button 
-        expand="block" 
-        color="success"
-        [routerLink]="['/tabs/reservas', paquete._id]">
-        Reservar este paquete
+      <ion-button color="success" [routerLink]="['/tabs/reservas']" [queryParams]="{ paqueteId: paquete._id }">
+          Reservar este Paquete
       </ion-button>
     </div>
 
