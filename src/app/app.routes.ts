@@ -66,7 +66,38 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'tabs-admin',
+    loadComponent: () => import('./tabs-admin/tabs-admin.page').then(m => m.TabsAdminPage),
+    children: [
+      {
+        path: 'crear-paquete',
+        loadComponent: () => import('./pages/admin/crear-paquete/crear-paquete.page').then(m => m.CrearPaquetePage),
+      },
+      {
+        path: 'paquetes',
+        loadComponent: () => import('./pages/admin/paquetes/paquetes.page').then(m => m.PaquetesPage),
+      },
+      {
+        path: 'comentarios',
+        loadComponent: () => import('./pages/admin/comentarios/comentarios.page').then(m => m.ComentariosPage),
+      },
+      {
+        path: 'usuarios',
+        loadComponent: () => import('./pages/admin/usuarios/usuarios.page').then(m => m.UsuariosPage),
+      },
+      {
+        path: 'estadisticas',
+        loadComponent: () => import('./pages/admin/estadisticas/estadisticas.page').then(m => m.EstadisticasPage),
+      },
+      {
+        path: '',
+        redirectTo: 'crear-paquete',
+        pathMatch: 'full',
+      }
+    ]
+  },
+  {
     path: 'detalle-paquete',
     loadComponent: () => import('./pages/detalle-paquete/detalle-paquete.page').then( m => m.DetallePaquetePage)
-  }
+  },
 ];

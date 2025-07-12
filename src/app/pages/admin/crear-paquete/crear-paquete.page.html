@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Crear Paquete</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="stacked">Nombre</ion-label>
+    <ion-input [(ngModel)]="nombre" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Descripción</ion-label>
+    <ion-textarea [(ngModel)]="descripcion" required></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Precio</ion-label>
+    <ion-input type="number" [(ngModel)]="precio" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Ubicación</ion-label>
+    <ion-input [(ngModel)]="ubicacion" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Origen</ion-label>
+    <ion-input [(ngModel)]="origen" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Destino</ion-label>
+    <ion-input [(ngModel)]="destino" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Tipo</ion-label>
+    <ion-select [(ngModel)]="tipo">
+      <ion-select-option value="ida">Solo Ida</ion-select-option>
+      <ion-select-option value="ida-vuelta">Ida y Vuelta</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Clase</ion-label>
+    <ion-select [(ngModel)]="clase">
+      <ion-select-option value="economica">Económica</ion-select-option>
+      <ion-select-option value="premium">Premium</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Máx. Pasajeros</ion-label>
+    <ion-input type="number" [(ngModel)]="maxPasajeros" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Imágenes (hasta 5)</ion-label>
+    <input type="file" (change)="onFileChange($event)" multiple accept="image/*">
+  </ion-item>
+
+  <ion-button expand="block" (click)="crearPaquete()">Crear Paquete</ion-button>
+</ion-content>

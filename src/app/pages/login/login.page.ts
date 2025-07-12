@@ -61,31 +61,39 @@ export class LoginPage {
   ) {}
 
   async login() {
-    const loading = await this.loadingCtrl.create({
-      message: 'Iniciando sesión...'
-    });
-    await loading.present();
+  const loading = await this.loadingCtrl.create({
+    message: 'Iniciando sesión...'
+  });
+  await loading.present();
 
-    this.http.post(this.backendUrl, {
-      email: this.email,
-      password: this.password
-    }).subscribe({
-      next: async (res: any) => {
-        await loading.dismiss();
-        localStorage.setItem('token', res.token);
+  this.http.post(this.backendUrl, {
+    email: this.email,
+    password: this.password
+  }).subscribe({
+    next: async (res: any) => {
+      await loading.dismiss();
+      localStorage.setItem('token', res.token);
+      localStorage.setItem('rol', res.rol);
+
+      if (res.rol === 'admin') {
+        this.router.navigate(['/tabs-admin']);
+      } else {
         this.router.navigate(['/tabs']);
-      },
-      error: async err => {
-        await loading.dismiss();
-        const toast = await this.toastCtrl.create({
-          message: err.error?.msg || 'Error al iniciar sesión',
-          duration: 3000,
-          color: 'danger'
-        });
-        await toast.present();
       }
-    });
-  }
+    },
+
+    error: async err => {
+      await loading.dismiss();
+      const toast = await this.toastCtrl.create({
+        message: err.error?.msg || 'Error al iniciar sesión',
+        duration: 3000,
+        color: 'danger'
+      });
+      await toast.present();
+    }
+  });
+}
+
 
   entrarComoInvitado() {
     this.router.navigate(['/tabs']);
