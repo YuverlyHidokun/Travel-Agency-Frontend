@@ -1,20 +1,93 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { HttpClient } from '@angular/common/http';
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonHeader, IonLabel, IonTitle, IonToolbar, ToastController, LoadingController, AlertController, IonText } from '@ionic/angular/standalone';
+import { API_URL } from 'src/app/config/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-paquetes',
   templateUrl: './paquetes.page.html',
   styleUrls: ['./paquetes.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonCard,
+    IonCardHeader,
+    IonCardContent,
+    IonCardTitle,
+    IonLabel,
+    IonButton,
+    IonText
+  ]
 })
 export class PaquetesPage implements OnInit {
+  paquetes: any[] = [];
+  loading = false;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+    private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
+    private router: Router
+  ) {}
 
   ngOnInit() {
+    this.obtenerPaquetes();
   }
 
+  async obtenerPaquetes() {
+    this.loading = true;
+    try {
+      const res: any = await this.http.get(`${API_URL}/travel/paquetes/`).toPromise();
+      this.paquetes = res;
+    } catch (err) {
+      this.mostrarToast('Error al obtener paquetes');
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  editarPaquete(paqueteId: string) {
+    this.router.navigate(['/crear-paquete'], { queryParams: { id: paqueteId } });
+  }
+
+  async eliminarPaquete(id: string) {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirmar',
+      message: '¿Estás seguro de que deseas eliminar este paquete?',
+      buttons: [
+        { text: 'Cancelar', role: 'cancel' },
+        {
+          text: 'Eliminar',
+          handler: async () => {
+            try {
+              await this.http.delete(`${API_URL}/paquetes/${id}`).toPromise();
+              this.mostrarToast('Paquete eliminado');
+              this.obtenerPaquetes();
+            } catch (err) {
+              this.mostrarToast('Error al eliminar el paquete');
+            }
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async mostrarToast(msg: string) {
+    const toast = await this.toastCtrl.create({
+      message: msg,
+      duration: 2500,
+      color: 'primary'
+    });
+    toast.present();
+  }
 }

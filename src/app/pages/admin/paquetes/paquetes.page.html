@@ -1,13 +1,25 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>paquetes</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Gestión de Paquetes</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">paquetes</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-card *ngFor="let paquete of paquetes">
+    <ion-card-header>
+      <ion-card-title>{{ paquete.nombre }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Destino:</strong> {{ paquete.destino }}</p>
+      <p><strong>Precio:</strong> ${{ paquete.precio }}</p>
+      <p><strong>Clase:</strong> {{ paquete.clase }}</p>
+      <p><strong>Pasajeros máximos:</strong> {{ paquete.maxPasajeros }}</p>
+      <ion-button color="primary" (click)="editarPaquete(paquete._id)">Editar</ion-button>
+      <ion-button color="danger" (click)="eliminarPaquete(paquete._id)">Eliminar</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-text *ngIf="!paquetes.length && !loading" color="medium">
+    <p class="ion-text-center">No hay paquetes disponibles.</p>
+  </ion-text>
 </ion-content>
