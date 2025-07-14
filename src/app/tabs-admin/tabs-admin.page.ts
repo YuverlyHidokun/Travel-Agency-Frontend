@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import {
   IonContent,
   IonHeader,
@@ -10,8 +9,15 @@ import {
   IonTabBar,
   IonTabButton,
   IonIcon,
-  IonLabel
+  IonLabel,
+  IonButton,
+  IonButtons,
 } from '@ionic/angular/standalone';
+
+import { Router } from '@angular/router';
+import { AdminPopoverComponent } from 'src/app/components/admin-popover/admin-popover.component';
+import { PopoverController } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -30,10 +36,26 @@ import {
     IonTabBar,
     IonTabButton,
     IonIcon,
-    IonLabel
+    IonLabel,
+    IonButton,
+    IonButtons,
+
+    // 👇 ¡IMPORTANTE! Agrega el popover aquí:
+    AdminPopoverComponent
   ]
 })
-export class TabsAdminPage implements OnInit {
-  constructor() {}
-  ngOnInit() {}
+export class TabsAdminPage {
+  constructor(
+    private router: Router,
+    private popoverCtrl: PopoverController
+  ) {}
+
+  async abrirPopover(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: AdminPopoverComponent,
+      event: ev,
+      translucent: true
+    });
+    await popover.present();
+  }
 }

@@ -5,7 +5,9 @@ import {
   barChart,
   addCircle,
   albums,
-  personCircle
+  personCircle,
+  logOutOutline,
+  personOutline
 } from 'ionicons/icons';
 
 addIcons({
@@ -13,6 +15,8 @@ addIcons({
   'chatbox': chatbox,
   'bar-chart': barChart,
   'add-circle': addCircle,
-  "albums":albums,
-  'person-circle':personCircle,
+  'albums': albums,
+  'person-circle': personCircle,
+  'log-out-outline': logOutOutline,
+  'person-outline': personOutline
 });
