@@ -61,5 +61,8 @@
     <input type="file" (change)="onFileChange($event)" multiple accept="image/*">
   </ion-item>
 
-  <ion-button expand="block" (click)="crearPaquete()">Crear Paquete</ion-button>
+    <ion-button expand="full" (click)="guardarPaquete()">
+      {{ paqueteId ? 'Actualizar Paquete' : 'Crear Paquete' }}
+    </ion-button>
+
 </ion-content>
