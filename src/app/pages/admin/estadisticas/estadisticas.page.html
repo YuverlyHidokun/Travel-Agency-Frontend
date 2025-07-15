@@ -1,13 +1,33 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>estadisticas</ion-title>
+    <ion-title>Estadísticas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">estadisticas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h2>Totales Generales</h2>
+  <p><strong>Usuarios registrados:</strong> {{ totalUsuarios }}</p>
+  <p><strong>Reservas realizadas:</strong> {{ totalReservas }}</p>
+
+  <hr />
+
+  <h3>Reservas por Estado</h3>
+  <canvas baseChart
+          [data]="{
+            labels: reservaEstadoLabels,
+            datasets: [{ data: reservaEstadoData, label: 'Estado de reservas' }]
+          }"
+          [type]="'bar'">
+  </canvas>
+
+  <hr />
+
+  <h3>Reservas por Mes</h3>
+  <canvas baseChart
+          [data]="{
+            labels: reservaMesLabels,
+            datasets: [{ data: reservaMesData, label: 'Reservas por mes' }]
+          }"
+          [type]="'line'">
+  </canvas>
 </ion-content>
