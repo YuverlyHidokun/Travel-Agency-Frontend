@@ -1,78 +1,82 @@
 <ion-content fullscreen>
-  <div class="container mt-3">
+  <ng-container *ngIf="paquete as p">
 
-    <!-- Carrusel Bootstrap -->
-    <div *ngIf="paquete.imagenes?.length" id="carouselPaquete" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-      <div class="carousel-indicators">
-        <button *ngFor="let img of paquete.imagenes; let i = index"
-                type="button"
-                data-bs-target="#carouselPaquete"
-                [attr.data-bs-slide-to]="i"
-                [class.active]="i === 0"
-                [attr.aria-current]="i === 0 ? 'true' : null"
-                [attr.aria-label]="'Slide ' + (i + 1)">
+    <div class="container mt-3">
+
+      <!-- Carrusel Bootstrap -->
+      <div *ngIf="p.imagenes?.length" id="carouselPaquete" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-indicators">
+          <button *ngFor="let img of p.imagenes; let i = index"
+                  type="button"
+                  data-bs-target="#carouselPaquete"
+                  [attr.data-bs-slide-to]="i"
+                  [class.active]="i === 0"
+                  [attr.aria-current]="i === 0 ? 'true' : null"
+                  [attr.aria-label]="'Slide ' + (i + 1)">
+          </button>
+        </div>
+        <div class="carousel-inner">
+          <div *ngFor="let img of p.imagenes; let i = index"
+               class="carousel-item"
+               [class.active]="i === 0">
+            <img [src]="img" class="d-block w-100 carousel-img" alt="Imagen del paquete">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselPaquete" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselPaquete" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
         </button>
       </div>
-      <div class="carousel-inner">
-        <div *ngFor="let img of paquete.imagenes; let i = index"
-             class="carousel-item"
-             [class.active]="i === 0">
-          <img [src]="img" class="d-block w-100 carousel-img" alt="Imagen del paquete">
+
+      <!-- Info del paquete -->
+      <div class="card mt-4">
+        <div class="card-header">
+          <h5 class="card-title mb-0">{{ p.nombre }}</h5>
+          <small class="text-muted">Ubicación: {{ p.ubicacion }}</small>
+        </div>
+        <div class="card-body">
+          <p><strong>Descripción:</strong> {{ p.descripcion }}</p>
+          <p><strong>Precio:</strong> ${{ p.precio }}</p>
+          <p><strong>Calificación:</strong> {{ p.calificacion }}</p>
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselPaquete" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Anterior</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselPaquete" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Siguiente</span>
-      </button>
-    </div>
 
-    <!-- Info del paquete -->
-    <div class="card mt-4">
-      <div class="card-header">
-        <h5 class="card-title mb-0">{{ paquete.nombre }}</h5>
-        <small class="text-muted">Ubicación: {{ paquete.ubicacion }}</small>
-      </div>
-      <div class="card-body">
-        <p><strong>Descripción:</strong> {{ paquete.descripcion }}</p>
-        <p><strong>Precio:</strong> ${{ paquete.precio }}</p>
-        <p><strong>Calificación:</strong> {{ paquete.calificacion }}</p>
-      </div>
-    </div>
-
-        <!-- Botón Reservar -->
-    <div class="mt-3">
-      <ion-button color="success" [routerLink]="['/tabs/reservas']" [queryParams]="{ paqueteId: paquete._id }">
+      <!-- Botón Reservar -->
+      <div class="mt-3">
+        <ion-button color="success" [routerLink]="['/tabs/reservas']" [queryParams]="{ paqueteId: p._id }">
           Reservar este Paquete
-      </ion-button>
+        </ion-button>
+      </div>
+
+      <!-- Formulario de reseña -->
+      <div *ngIf="token" class="mt-4">
+        <label for="comentario" class="form-label">Tu reseña</label>
+        <textarea id="comentario" [(ngModel)]="comentario" class="form-control" rows="3" placeholder="Escribe tu comentario"></textarea>
+
+        <label for="calificacion" class="form-label mt-3">Calificación</label>
+        <select id="calificacion" [(ngModel)]="calificacion" class="form-select">
+          <option *ngFor="let n of [1,2,3,4,5]" [value]="n">{{n}}</option>
+        </select>
+
+        <button class="btn btn-primary mt-3" (click)="enviarResena()">Enviar reseña</button>
+      </div>
+
+      <!-- Lista de reseñas -->
+      <div *ngIf="p.resenas?.length" class="mt-5">
+        <h5>Reseñas</h5>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let r of p.resenas">
+            <p class="mb-1">{{ r.comentario }}</p>
+            <small class="text-muted">Calificación: {{ r.calificacion }}/5</small>
+          </li>
+        </ul>
+      </div>
+
     </div>
 
-    <!-- Formulario de reseña -->
-    <div *ngIf="token" class="mt-4">
-      <label for="comentario" class="form-label">Tu reseña</label>
-      <textarea id="comentario" [(ngModel)]="comentario" class="form-control" rows="3" placeholder="Escribe tu comentario"></textarea>
-
-      <label for="calificacion" class="form-label mt-3">Calificación</label>
-      <select id="calificacion" [(ngModel)]="calificacion" class="form-select">
-        <option *ngFor="let n of [1,2,3,4,5]" [value]="n">{{n}}</option>
-      </select>
-
-      <button class="btn btn-primary mt-3" (click)="enviarResena()">Enviar reseña</button>
-    </div>
-
-    <!-- Lista de reseñas -->
-    <div *ngIf="paquete.resenas?.length" class="mt-5">
-      <h5>Reseñas</h5>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let r of paquete.resenas">
-          <p class="mb-1">{{ r.comentario }}</p>
-          <small class="text-muted">Calificación: {{ r.calificacion }}/5</small>
-        </li>
-      </ul>
-    </div>
-
-  </div>
+  </ng-container>
 </ion-content>

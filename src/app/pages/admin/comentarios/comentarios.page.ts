@@ -50,7 +50,7 @@ export class ComentariosPage implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     this.http.get<any[]>(`${API_URL}/travel/paquetes`, { headers }).subscribe({
       next: data => {
-        this.paquetes = data.filter(p => p.reseñas.length > 0);
+        this.paquetes = data.filter(p => Array.isArray(p.resenas) && p.resenas.length > 0);
       },
       error: err => {
         console.error('Error al cargar paquetes:', err);
