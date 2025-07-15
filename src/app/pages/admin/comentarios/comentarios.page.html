@@ -1,13 +1,29 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>comentarios</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Comentarios de usuarios</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">comentarios</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div *ngIf="paquetes.length === 0" class="ion-padding">
+    No hay reseñas registradas aún.
+  </div>
+
+  <ion-card *ngFor="let paquete of paquetes">
+    <ion-card-header>
+      <ion-card-title>{{ paquete.nombre }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div *ngFor="let resena of paquete.resenas">
+        <p><strong>Comentario:</strong> {{ resena.comentario }}</p>
+        <p><strong>Calificación:</strong> {{ resena.calificacion }}</p>
+        <ion-button color="danger" size="small" (click)="eliminarResena(paquete._id, resena._id)">
+          Eliminar
+        </ion-button>
+        <hr />
+      </div>
+
+    </ion-card-content>
+  </ion-card>
 </ion-content>
