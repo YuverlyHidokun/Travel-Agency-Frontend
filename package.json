@@ -24,6 +24,7 @@
     "@angular/router": "^17.3.12",
     "@capacitor/android": "^7.4.1",
     "@capacitor/app": "7.0.1",
+    "@capacitor/assets": "^3.0.5",
     "@capacitor/camera": "^7.0.1",
     "@capacitor/core": "7.4.0",
     "@capacitor/haptics": "7.0.1",
