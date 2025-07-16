@@ -1,0 +1,5 @@
+[build]
+nixpacksPlan = false
+buildCommand = "npm install --legacy-peer-deps && npm run build"
+[tools]
+bun = false
