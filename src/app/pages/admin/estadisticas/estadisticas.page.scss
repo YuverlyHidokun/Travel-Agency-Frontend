@@ -1,0 +1,57 @@
+.stats-content {
+  --background: var(--ion-background-color);
+  color: #333;
+
+  section {
+    margin-bottom: 2rem;
+  }
+
+  h2, h3 {
+    color: var(--ion-color-primary);
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .totals-cards {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+
+    .total-card {
+      background: var(--ion-color-secondary);
+      flex: 1 1 150px;
+      padding: 1.2rem;
+      border-radius: var(--ion-border-radius);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+
+      h3 {
+        font-size: 2.5rem;
+        margin: 0 0 0.3rem;
+      }
+      p {
+        font-size: 1rem;
+        margin: 0;
+      }
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .chart-section {
+    background: #fff;
+    padding: 1rem;
+    border-radius: var(--ion-border-radius);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 2rem 0;
+  }
+}

@@ -1,12 +1,109 @@
+ion-content {
+  --background: #FFF5E4;
+  padding: 16px;
+}
+
+/* ---------------------- Avatar y Encabezado ---------------------- */
+.perfil-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+  text-align: center;
+
+  h2 {
+    font-size: 22px;
+    color: var(--ion-color-primary);
+    margin-top: 12px;
+    margin-bottom: 4px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #666;
+  }
+}
+
 .avatar-perfil {
   width: 120px;
   height: 120px;
-  margin: auto;
-  border: 3px solid #3880ff;
   border-radius: 50%;
   overflow: hidden;
+  border: 4px solid var(--ion-color-primary);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
-.perfil-header {
-  margin-bottom: 20px;
+/* ---------------------- Lista de datos ---------------------- */
+ion-list {
+  margin-top: 16px;
+}
+
+ion-item {
+  --background: #f9f9f9;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  padding: 10px 14px;
+}
+
+ion-label {
+  font-weight: 600;
+  color: var(--ion-color-primary);
+}
+
+ion-note {
+  font-size: 14px;
+  color: #444;
+}
+
+/* ---------------------- Botones ---------------------- */
+ion-button {
+  --border-radius: 14px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  margin-top: 14px;
+  font-size: 15px;
+}
+
+ion-button[color="primary"] {
+  --background: var(--ion-color-primary);
+  --background-hover: #b44f07;
+}
+
+ion-button[color="danger"] {
+  --background: #eb445a;
+}
+
+ion-button[color="warning"] {
+  --background: #ffc409;
+  --color: #333;
+}
+
+ion-button[fill="outline"] {
+  --border-color: var(--ion-color-primary);
+}
+
+/* ---------------------- Cargando ---------------------- */
+ion-spinner {
+  display: block;
+  margin: 30px auto 10px;
+}
+
+p.ion-text-center {
+  font-size: 14px;
+  color: #777;
+  margin-top: 8px;
+}
+
+/* ---------------------- Vista de Invitado ---------------------- */
+.ion-text-center h2 {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 16px;
 }

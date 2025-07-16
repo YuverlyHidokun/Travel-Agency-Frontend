@@ -1,33 +1,43 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Estadísticas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <h2>Totales Generales</h2>
-  <p><strong>Usuarios registrados:</strong> {{ totalUsuarios }}</p>
-  <p><strong>Reservas realizadas:</strong> {{ totalReservas }}</p>
+<ion-content fullscreen class="ion-padding stats-content">
+  <section class="totals">
+    <h2>Totales Generales</h2>
+    <div class="totals-cards">
+      <div class="total-card">
+        <h3>{{ totalUsuarios }}</h3>
+        <p>Usuarios registrados</p>
+      </div>
+      <div class="total-card">
+        <h3>{{ totalReservas }}</h3>
+        <p>Reservas realizadas</p>
+      </div>
+    </div>
+  </section>
 
-  <hr />
+  <section class="chart-section">
+    <h3>Reservas por Estado</h3>
+    <canvas baseChart
+            [data]="{
+              labels: reservaEstadoLabels,
+              datasets: [{ data: reservaEstadoData, label: 'Estado de reservas', backgroundColor: ['#CD5C08','#6A9C89','#C1D8C3'] }]
+            }"
+            [type]="'bar'">
+    </canvas>
+  </section>
 
-  <h3>Reservas por Estado</h3>
-  <canvas baseChart
-          [data]="{
-            labels: reservaEstadoLabels,
-            datasets: [{ data: reservaEstadoData, label: 'Estado de reservas' }]
-          }"
-          [type]="'bar'">
-  </canvas>
-
-  <hr />
-
-  <h3>Reservas por Mes</h3>
-  <canvas baseChart
-          [data]="{
-            labels: reservaMesLabels,
-            datasets: [{ data: reservaMesData, label: 'Reservas por mes' }]
-          }"
-          [type]="'line'">
-  </canvas>
+  <section class="chart-section">
+    <h3>Reservas por Mes</h3>
+    <canvas baseChart
+            [data]="{
+              labels: reservaMesLabels,
+              datasets: [{ data: reservaMesData, label: 'Reservas por mes', borderColor: '#CD5C08', backgroundColor: 'rgba(205, 92, 8, 0.2)', fill: true }]
+            }"
+            [type]="'line'">
+    </canvas>
+  </section>
 </ion-content>

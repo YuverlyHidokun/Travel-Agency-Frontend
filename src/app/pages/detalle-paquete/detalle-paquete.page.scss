@@ -1,26 +1,144 @@
-/* Carousel image fixed height y que cubra todo */
-.carousel-img {
-  height: 300px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-/* Ajustes para que ion-content permita scroll completo */
 ion-content {
+  --background: #FFF5E4;
+  padding: 16px;
   --overflow: auto;
 }
 
-/* Evitar que container limite altura */
-.container {
-  min-height: 100%;
-  padding-bottom: 2rem;
+/* ------------ Carrusel ------------ */
+.carousel-img {
+  height: 280px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
 }
 
-/* Opcional: ajustar fuente y tamaños */
-.card-title {
-  font-size: 1.5rem;
+.carousel-img:hover {
+  transform: scale(1.01);
 }
 
-textarea, select {
+.carousel-indicators [data-bs-target] {
+  background-color: var(--ion-color-primary);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* ------------ Tarjeta del paquete ------------ */
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-header {
+  background-color: var(--ion-color-primary);
+  color: white;
+  padding: 12px 16px;
+
+  .card-title {
+    font-size: 1.4rem;
+    color: #ffffff !important; // O tu color primario si prefieres
+  }
+
+  small {
+    font-size: 0.85rem;
+  }
+}
+
+.card-body {
+  padding: 16px;
+  font-size: 0.95rem;
+
+  p {
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  strong {
+    color: var(--ion-color-primary);
+  }
+}
+
+/* ------------ Botón reservar ------------ */
+ion-button[color="success"] {
+  margin-top: 10px;
+  --border-radius: 12px;
+  font-weight: 600;
+}
+
+/* ------------ Formulario de reseña ------------ */
+textarea.form-control,
+select.form-select {
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  padding: 12px;
+  background-color: #fdfdfd;
   font-size: 1rem;
+  box-shadow: none;
+  transition: border-color 0.2s ease;
+}
+
+textarea:focus,
+select:focus {
+  border-color: var(--ion-color-primary);
+  outline: none;
+}
+
+label.form-label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.btn-primary {
+  background-color: var(--ion-color-primary);
+  border-color: var(--ion-color-primary);
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ------------ Lista de reseñas ------------ */
+.list-group-item {
+  border-radius: 12px;
+  margin-bottom: 12px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  padding: 14px;
+
+  p {
+    margin-bottom: 4px;
+    font-size: 15px;
+    color: #333;
+  }
+
+  small {
+    color: #777;
+    font-size: 13px;
+  }
+}
+
+h5 {
+  font-size: 1.25rem;
+  color: var(--ion-color-primary);
+  margin-bottom: 12px;
+}
+
+/* ------------ Responsive ajuste para pantallas pequeñas ------------ */
+@media (max-width: 480px) {
+  .carousel-img {
+    height: 220px;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+  }
+
+  textarea,
+  select {
+    font-size: 0.95rem;
+  }
 }

@@ -1,0 +1,93 @@
+ion-content {
+  --background: #FFF5E4;
+  padding: 16px;
+}
+
+/* ----------- Tarjetas ----------- */
+ion-card {
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+  overflow: hidden;
+  background: white;
+  transition: transform 0.2s ease;
+}
+
+ion-card:hover {
+  transform: translateY(-3px);
+}
+
+/* ----------- Título ----------- */
+ion-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ion-color-primary);
+}
+
+/* ----------- Items de lista ----------- */
+ion-item {
+  --background: #f9f9f9;
+  border-radius: 12px;
+  margin-top: 12px;
+  border: 1px solid #ddd;
+  align-items: flex-start;
+  padding: 12px;
+}
+
+ion-label h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ion-color-primary);
+  margin-bottom: 4px;
+}
+
+ion-label p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #444;
+}
+
+/* ----------- Badges ----------- */
+ion-badge {
+  font-size: 13px;
+  text-transform: capitalize;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+/* ----------- Botones ----------- */
+ion-buttons {
+  display: flex;
+  gap: 8px;
+  margin-left: 8px;
+}
+
+ion-button {
+  --border-radius: 14px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+
+/* ----------- Botón toggle crear reserva ----------- */
+ion-button[expand="block"] {
+  margin-top: 20px;
+}
+
+/* ----------- Mensaje para usuarios sin reservas ----------- */
+ion-text {
+  font-size: 16px;
+  color: #666;
+}
+
+/* ----------- Vista de invitados ----------- */
+.ion-text-center {
+  margin-top: 80px;
+  padding: 0 24px;
+}
+
+.ion-text-center h2 {
+  font-size: 20px;
+  color: #444;
+  margin-bottom: 16px;
+}

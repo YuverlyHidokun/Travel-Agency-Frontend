@@ -1,3 +1,5 @@
+@import './theme/variables.scss';
+
 @import "@ionic/angular/css/core.css";
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
@@ -11,45 +13,3 @@
 
 @import "@ionic/angular/css/display.css";
 
-// Tema claro por defecto
-:root {
-  --ion-color-primary: #3880ff;
-  --ion-color-primary-contrast: #ffffff;
-  --ion-color-step-50: #f2f2f2;
-  --ion-border-radius: 12px;
-}
-
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: var(--ion-color-step-50);
-}
-
-ion-card {
-  max-width: 400px;
-  margin: 5% auto;
-  border-radius: var(--ion-border-radius);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-ion-card-title {
-  font-size: 24px;
-  text-align: center;
-}
-
-ion-item {
-  --highlight-background: transparent;
-  --background: white;
-  border-radius: var(--ion-border-radius);
-  margin-top: 12px;
-}
-
-ion-button {
-  margin-top: 20px;
-}
-
-ion-avatar img {
-  border-radius: 50%;
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}

@@ -62,19 +62,22 @@
               <p>{{ resultado.descripcion }}</p>
             </ion-label>
 
-            <ion-buttons slot="end">
+            <ion-buttons slot="end" class="botones">
               <ion-button
                 [routerLink]="['/tabs/paquete', resultado._id]"
-                color="primary"
-              >
+                color="primary">
                 Ver más
               </ion-button>
 
-              <ion-button color="success" [routerLink]="['/tabs/reservas']" [queryParams]="{ paqueteId: resultado._id }">
+              <ion-button
+                color="success"
+                [routerLink]="['/tabs/reservas']"
+                [queryParams]="{ paqueteId: resultado._id }">
                 Reservar
               </ion-button>
             </ion-buttons>
           </ion-item>
+
         </ion-list>
       </ion-card-content>
     </ion-card>
