@@ -1,8 +1,0 @@
-services:
-  - type: static
-    name: travel-agency-frontend
-    env: node
-    buildCommand: npm install --legacy-peer-deps && npm run build
-    staticPublishPath: www
-    branch: master
-    repo: https://github.com/YuverlyHidokun/Travel-Agency-Frontend
