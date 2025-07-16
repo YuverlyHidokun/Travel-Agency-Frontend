@@ -25,7 +25,7 @@ export class VerificacionPage {
   ngOnInit() {
     const token = this.route.snapshot.paramMap.get('token');
     if (token) {
-      const url = `${API_URL}/travel/usuarios/verificar/${token}`;
+      const url = `${API_URL}/travel/verificar/${token}`;
 
       this.http.get(url).subscribe({
         next: async (res: any) => {
