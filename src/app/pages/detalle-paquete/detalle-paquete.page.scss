@@ -142,3 +142,38 @@ h5 {
     font-size: 0.95rem;
   }
 }
+
+/* ------------ Galería de imágenes ------------ */
+.image-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.image-item {
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  background-color: white;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  border-radius: 16px;
+  transition: transform 0.3s ease;
+}
+
+.gallery-img:hover {
+  transform: scale(1.03);
+}
+
+/* Responsive ajuste para pantallas pequeñas */
+@media (max-width: 480px) {
+  .gallery-img {
+    height: 130px;
+  }
+}

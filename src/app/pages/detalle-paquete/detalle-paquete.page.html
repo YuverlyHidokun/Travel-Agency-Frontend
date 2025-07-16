@@ -3,33 +3,11 @@
 
     <div class="container mt-3">
 
-      <!-- Carrusel Bootstrap -->
-      <div *ngIf="p.imagenes?.length" id="carouselPaquete" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-        <div class="carousel-indicators">
-          <button *ngFor="let img of p.imagenes; let i = index"
-                  type="button"
-                  data-bs-target="#carouselPaquete"
-                  [attr.data-bs-slide-to]="i"
-                  [class.active]="i === 0"
-                  [attr.aria-current]="i === 0 ? 'true' : null"
-                  [attr.aria-label]="'Slide ' + (i + 1)">
-          </button>
+      <!-- Galería de Imágenes -->
+      <div *ngIf="p.imagenes?.length" class="image-gallery">
+        <div class="image-item" *ngFor="let img of p.imagenes">
+          <img [src]="img" alt="Imagen del paquete" class="gallery-img">
         </div>
-        <div class="carousel-inner">
-          <div *ngFor="let img of p.imagenes; let i = index"
-               class="carousel-item"
-               [class.active]="i === 0">
-            <img [src]="img" class="d-block w-100 carousel-img" alt="Imagen del paquete">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselPaquete" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Anterior</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselPaquete" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Siguiente</span>
-        </button>
       </div>
 
       <!-- Info del paquete -->
@@ -42,6 +20,11 @@
           <p><strong>Descripción:</strong> {{ p.descripcion }}</p>
           <p><strong>Precio:</strong> ${{ p.precio }}</p>
           <p><strong>Calificación:</strong> {{ p.calificacion }}</p>
+          <p><strong>Origen:</strong> {{ p.origen }}</p>
+          <p><strong>Destino:</strong> {{ p.destino }}</p>
+          <p><strong>Tipo de viaje:</strong> {{ p.tipo }}</p>
+          <p><strong>Clase:</strong> {{ p.clase }}</p>
+          <p><strong>Máx. pasajeros:</strong> {{ p.maxPasajeros }}</p>
         </div>
       </div>
 
