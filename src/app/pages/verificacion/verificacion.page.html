@@ -1,18 +1,16 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar [color]="color">
     <ion-title>Verificación</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding verify-content" fullscreen>
-
   <ion-card>
     <ion-card-content class="content-center">
-      <ion-text color="primary" class="mensaje-text">
+      <ion-text [color]="color" class="mensaje-text">
         <h2>{{ mensaje }}</h2>
       </ion-text>
-      <ion-spinner *ngIf="mensaje === 'Verificando...'" name="crescent" color="primary" class="spinner"></ion-spinner>
+      <ion-spinner *ngIf="cargando" name="crescent" color="primary" class="spinner"></ion-spinner>
     </ion-card-content>
   </ion-card>
-
 </ion-content>

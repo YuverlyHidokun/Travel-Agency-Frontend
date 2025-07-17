@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 })
 export class VerificacionPage {
   mensaje = 'Verificando...';
+  color: 'primary' | 'success' | 'danger' = 'primary';
+  cargando = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,19 +32,29 @@ export class VerificacionPage {
       this.http.get(url).subscribe({
         next: async (res: any) => {
           this.mensaje = res.msg || 'Cuenta verificada con éxito';
+          this.color = 'success';
+          this.cargando = false;
+
           const toast = await this.toastCtrl.create({
             message: this.mensaje,
             duration: 3000,
             color: 'success'
           });
           await toast.present();
-          this.router.navigate(['/login']);
+
+          // Espera 3 segundos antes de redirigir
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 3000);
         },
         error: async err => {
           this.mensaje = err.error?.msg || 'Token inválido o expirado';
+          this.color = 'danger';
+          this.cargando = false;
+
           const toast = await this.toastCtrl.create({
             message: this.mensaje,
-            duration: 3000,
+            duration: 4000,
             color: 'danger'
           });
           await toast.present();
@@ -50,6 +62,8 @@ export class VerificacionPage {
       });
     } else {
       this.mensaje = 'Token no proporcionado';
+      this.color = 'danger';
+      this.cargando = false;
     }
   }
 }
