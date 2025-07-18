@@ -26,11 +26,15 @@ export class VerificacionPage {
 
   ngOnInit() {
     const token = this.route.snapshot.paramMap.get('token');
+    console.log('🔍 Token capturado desde la URL:', token); // DEBUG
+
     if (token) {
       const url = `${API_URL}/travel/verificar/${token}`;
+      console.log('🌐 Haciendo GET a:', url); // DEBUG
 
       this.http.get(url).subscribe({
         next: async (res: any) => {
+          console.log('✅ Respuesta del backend:', res); // DEBUG
           this.mensaje = res.msg || 'Cuenta verificada con éxito';
           this.color = 'success';
           this.cargando = false;
@@ -42,12 +46,13 @@ export class VerificacionPage {
           });
           await toast.present();
 
-          // Espera 3 segundos antes de redirigir
           setTimeout(() => {
             this.router.navigate(['/login']);
           }, 3000);
         },
         error: async err => {
+          console.error('❌ Error al verificar cuenta:', err); // DEBUG
+
           this.mensaje = err.error?.msg || 'Token inválido o expirado';
           this.color = 'danger';
           this.cargando = false;
@@ -61,6 +66,7 @@ export class VerificacionPage {
         }
       });
     } else {
+      console.error('❗ Token no proporcionado'); // DEBUG
       this.mensaje = 'Token no proporcionado';
       this.color = 'danger';
       this.cargando = false;
