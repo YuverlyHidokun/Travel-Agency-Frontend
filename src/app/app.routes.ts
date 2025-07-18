@@ -18,7 +18,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/register/register.page').then(m => m.RegisterPage)
   },
   {
-    path: 'travel/usuarios/verificar/:token',
+    path: 'usuarios/verificar/:token',
     loadComponent: () => import('./pages/verificacion/verificacion.page').then(m => m.VerificacionPage)
   },
   {
