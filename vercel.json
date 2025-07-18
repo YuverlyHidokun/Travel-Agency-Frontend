@@ -1,7 +1,16 @@
 {
   "rewrites": [
-    { "source": "/travel/usuarios/verificar/:token", "destination": "/" },
-    { "source": "/travel/reset-password/:token", "destination": "/" },
-    { "source": "/(.*)", "destination": "/" }
+    {
+      "source": "/travel/usuarios/verificar/:token",
+      "destination": "/"
+    },
+    {
+      "source": "/travel/reset-password/:token",
+      "destination": "/"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
   ]
 }
