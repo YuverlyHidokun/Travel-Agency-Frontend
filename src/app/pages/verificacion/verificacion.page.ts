@@ -29,7 +29,7 @@ export class VerificacionPage {
     console.log('🔍 Token capturado desde la URL:', token); // DEBUG
 
     if (token) {
-      const url = `${API_URL}/travel/verificar/${token}`;
+      const url = `${API_URL}/travel/usuarios/verificar/${token}`;
       console.log('🌐 Haciendo GET a:', url); // DEBUG
 
       this.http.get(url).subscribe({
