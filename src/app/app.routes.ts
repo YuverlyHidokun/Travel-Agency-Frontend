@@ -104,4 +104,13 @@ export const routes: Routes = [
     path: 'detalle-paquete',
     loadComponent: () => import('./pages/detalle-paquete/detalle-paquete.page').then( m => m.DetallePaquetePage)
   },
+  {
+    path: 'recuperar-password',
+    loadComponent: () => import('./pages/recuperar-password/recuperar-password.page').then(m => m.RecuperarPasswordPage)
+  },
+  {
+    path: 'recuperar-password/:token',
+    loadComponent: () => import('./pages/reset-password/reset-password.page').then(m => m.ResetPasswordPage)
+  },
+
 ];
