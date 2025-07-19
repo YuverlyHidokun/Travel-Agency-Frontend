@@ -109,7 +109,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/recuperar-password/recuperar-password.page').then(m => m.RecuperarPasswordPage)
   },
   {
-    path: 'recuperar-password',
+    path: 'recuperar-password/:token',
     loadComponent: () => import('./pages/reset-password/reset-password.page').then(m => m.ResetPasswordPage)
   },
 
