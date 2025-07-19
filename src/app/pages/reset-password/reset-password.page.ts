@@ -61,22 +61,21 @@ export class ResetPasswordPage implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
-    this.route.queryParamMap.subscribe(params => {
-      const token = params.get('token');
-      const valid = params.get('valid');
-      
-      if (!token || valid !== 'true') {
-        this.presentToast('Token inválido o expirado', 'danger');
-        this.router.navigate(['/login']);
-        return;
-      }
+    ngOnInit() {
+      this.route.queryParamMap.subscribe(params => {
+        const token = params.get('token');
+        const valid = params.get('valid');
 
-      this.token = token;
-      this.tokenValido = true; // Ya validado por backend
-    });
-  }
+        if (!token || valid !== 'true') {
+          this.presentToast('Token inválido o expirado', 'danger');
+          this.router.navigate(['/login']);
+          return;
+        }
 
+        this.token = token;
+        this.tokenValido = true;
+      });
+    }
   async cambiarPassword() {
     if (!this.password || !this.confirmpassword) {
       return this.presentToast('Todos los campos son obligatorios', 'warning');
