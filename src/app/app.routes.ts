@@ -112,5 +112,4 @@ export const routes: Routes = [
     path: 'recuperar-password/:token',
     loadComponent: () => import('./pages/reset-password/reset-password.page').then(m => m.ResetPasswordPage)
   },
-
 ];
